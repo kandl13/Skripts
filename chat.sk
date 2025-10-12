@@ -1,13 +1,14 @@
+# Chat.sk by kandl
+# Required Addon: Skript, Sk-reflect, and Skbee
+# This skript is for letting servers have a custom chat format but alos allowing players to ping others by just typing their name
+
 on chat:
 	set {_message} to message
-	set {_prefix} to colored (player's prefix).replaceAll("&#([a-fA-F0-9]{6})", "<#$1>")
+	set {_prefix} to colored (player's prefix).replaceAll("&#([a-fA-F0-9]{6})", "<#$1>") #This is to fix soime color formatting things between different styles
 	loop all players:
 		if {_message} contains "%loop-player%":
 			replace "%loop-player%" with "&e@%loop-player%&r" in {_message} 
 			send title " " to loop-player
-			send subtitle "<#DED123>&lY<#E0D124>&lo<#E2D025>&lu <#E4D026>&lw<#E6D027>&le<#E8CF28>&lr<#EACF29>&le <#ECCF2A>&lm<#EFCF2B>&le<#F1CE2C>&ln<#F3CE2D>&lt<#F5CE2E>&li<#F7CD2F>&lo<#F9CD30>&ln<#FBCD31>&le<#FDCC32>&ld<#FFCC33>&l!" to loop-player
-			play sound "entity.experience_orb.pickup" with volume 1 to loop-player
-		if {tag::%uuid of player%} is set:
-			set chat format to "%{_prefix}%%player%%{tag::%uuid of player%}%&7» &f%{_message}%"
-
-
+			send subtitle "<#DED123>&lYou Were Mentioned!" to loop-player #Feel free to chnage what the message is
+			play sound "entity.experience_orb.pickup" with volume 1 to loop-player 
+		set chat format to "%{_prefix}%%player% &7» &f%{_message}%"

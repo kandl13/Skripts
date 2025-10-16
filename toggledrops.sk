@@ -1,0 +1,20 @@
+# toggledrops.sk by kandl
+# Required Addon: Skript, and Skbee
+# This skript is for having server let their players toggle dropping by using /drops they can drop or not drop items
+
+on join:
+	set {drop::%uuid of player%} to false
+
+command /drops:
+	trigger:
+		if {drop::%uuid of player%} is true:
+			set {drop::%uuid of player%} to false
+			send "Server Name &6| &cDropping is now disabled!" to player
+		else:
+			set {drop::%uuid of player%} to true
+			send "Server Name &6| &eYou can now drop items!" to player
+
+on drop:
+	if {drop::%uuid of player%} is false:
+		send "Server Name &6| &cType /drops to enable droppig!" to player
+		cancel event
